@@ -1,0 +1,17 @@
+version: '3'
+
+networks:
+  app:
+    driver: bridge
+
+services:
+  back:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: back
+    restart: on-failure
+    environment:
+      - API_TOKEN=
+    networks:
+      - app
