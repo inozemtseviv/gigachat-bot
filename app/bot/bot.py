@@ -1,10 +1,8 @@
 from telebot import types, TeleBot
 
-
 class Bot:
     def __init__(self, token: str):
         self.bot = TeleBot(token)
-        self.setup_handlers()
 
     def setup_handlers(self):
         @self.bot.message_handler(commands=['start'])
@@ -25,4 +23,5 @@ class Bot:
                     self.bot.answer_callback_query(function_call.id)
 
     def run(self):
+        self.setup_handlers()
         self.bot.infinity_polling()
