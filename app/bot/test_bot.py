@@ -14,9 +14,9 @@ def mock_bot(mocker):
 
 def test_run_invokes_setup_handlers_and_infinity_polling(mock_bot, mocker):
     mock_bot.setup_handlers = MagicMock()
-    mock_bot.bot.infinity_polling = MagicMock()
+    mock_bot.tg_bot.infinity_polling = MagicMock()
 
     mock_bot.run()
 
     mock_bot.setup_handlers.assert_called_once()
-    mock_bot.bot.infinity_polling.assert_called_once()
+    mock_bot.tg_bot.infinity_polling.assert_called_once()
