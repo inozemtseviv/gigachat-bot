@@ -5,6 +5,6 @@ from app.bot.bot import Bot
 
 load_dotenv()
 
-tg_giga = Bot(os.getenv('TG_TOKEN'))
+tg_giga = Bot(os.getenv('TG_TOKEN'), os.getenv('GIGA_TOKEN'))
 
 tg_giga.run()

@@ -6,7 +6,8 @@ from bot import Bot
 @pytest.fixture
 def mock_bot(mocker):
     mocker.patch('bot.TeleBot', autospec=True)
-    bot_instance = Bot('FAKE_TOKEN')
+    mocker.patch('bot.GigaChat', autospec=True)
+    bot_instance = Bot('FAKE_TOKEN', 'FAKE_TOKEN')
     return bot_instance
 
 def test_run_invokes_setup_handlers_and_infinity_polling(mock_bot, mocker):
