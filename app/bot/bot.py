@@ -7,7 +7,6 @@ class Bot:
         self.tg_bot = TeleBot(tg_token)
         self.giga_bot = (
             GigaChat(credentials=giga_token, verify_ssl_certs=False))
-        print("Bot initialized")
 
     def setup_handlers(self):
         @self.tg_bot.message_handler(commands=['help', 'start'])
