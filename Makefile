@@ -1,6 +1,6 @@
 .PHONY: serve
 serve:
-	uvicorn main:app --host localhost --port 3000
+	source venv/bin/activate && python main.py
 
 .PHONY: up
 up:
