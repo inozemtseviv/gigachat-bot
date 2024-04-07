@@ -22,12 +22,16 @@ class Bot:
 
         @self.tg_bot.message_handler(func=lambda message: True)
         def response(message):
-            resp = 'Произошла непредвиденная ошибка.'
             try:
                 answer = self.giga_bot.chat(message.text)
                 resp = answer.choices[0].message.content
-            finally:
-                self.tg_bot.reply_to(message, resp)
+                self.tg_bot.reply_to(message, resp, parse_mode="Markdown")
+            except Exception:
+                self.tg_bot.reply_to(
+                    message,
+                    'Произошла непредвиденная ошибка.',
+                    parse_mode="Markdown"
+                )
 
     def run(self):
         self.setup_handlers()
