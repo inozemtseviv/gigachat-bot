@@ -1,27 +1,34 @@
-from telebot import types, TeleBot
+from telebot import TeleBot
+from gigachat import GigaChat
+
 
 class Bot:
-    def __init__(self, token: str):
-        self.bot = TeleBot(token)
+    def __init__(self, tg_token: str, giga_token):
+        self.tg_bot = TeleBot(tg_token)
+        self.giga_bot = (
+            GigaChat(credentials=giga_token, verify_ssl_certs=False))
 
     def setup_handlers(self):
-        @self.bot.message_handler(commands=['start'])
+        @self.tg_bot.message_handler(commands=['help', 'start'])
         def start_bot(message):
-            first_mess = f"<b>{message.from_user.first_name} {message.from_user.last_name}</b>, привет!\nХочешь что-то узнать?"
-            markup = types.InlineKeyboardMarkup()
-            button_yes = types.InlineKeyboardButton(text='Да', callback_data='yes')
-            markup.add(button_yes)
-            self.bot.send_message(message.chat.id, first_mess, parse_mode='html', reply_markup=markup)
+            first_mess = \
+                (f"<b>"
+                 f"{message.from_user.first_name} "
+                 f"{message.from_user.last_name}</b>, привет!\n"
+                 f"Задай свой вопрос и я поищу для тебя ответ.")
 
-        @self.bot.callback_query_handler(func=lambda call: True)
-        def response(function_call):
-            if function_call.message:
-                if function_call.data == 'yes':
-                    second_mess = 'Задай свой вопрос и я поищу для тебя ответ.'
-                    markup = types.InlineKeyboardMarkup()
-                    self.bot.send_message(function_call.message.chat.id, second_mess, reply_markup=markup)
-                    self.bot.answer_callback_query(function_call.id)
+            (self.tg_bot
+             .send_message(message.chat.id, first_mess, parse_mode='html'))
+
+        @self.tg_bot.message_handler(func=lambda message: True)
+        def response(message):
+            resp = 'Произошла непредвиденная ошибка.'
+            try:
+                answer = self.giga_bot.chat(message.text)
+                resp = answer.choices[0].message.content
+            finally:
+                self.tg_bot.reply_to(message, resp)
 
     def run(self):
         self.setup_handlers()
-        self.bot.infinity_polling()
+        self.tg_bot.infinity_polling()
