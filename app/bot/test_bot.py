@@ -1,7 +1,8 @@
 import pytest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 from bot import Bot
+
 
 @pytest.fixture
 def mock_bot(mocker):
@@ -9,6 +10,7 @@ def mock_bot(mocker):
     mocker.patch('bot.GigaChat', autospec=True)
     bot_instance = Bot('FAKE_TOKEN', 'FAKE_TOKEN')
     return bot_instance
+
 
 def test_run_invokes_setup_handlers_and_infinity_polling(mock_bot, mocker):
     mock_bot.setup_handlers = MagicMock()
