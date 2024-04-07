@@ -12,6 +12,7 @@ services:
     container_name: back
     restart: on-failure
     environment:
-      - API_TOKEN=
+      - TG_TOKEN=
+      - GIGA_TOKEN=
     networks:
       - app

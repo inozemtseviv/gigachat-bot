@@ -15,6 +15,7 @@
 файле [docker-compose.yml](docker-compose.yml) для сервиса `back`:
 
 - `GIGA_TOKEN` - токен, полученный по [инструкции](https://developers.sber.ru/docs/ru/gigachat/individuals-quickstart).
+- `TG_TOKEN` - токен, полученный по [инструкции](https://core.telegram.org/bots#how-do-i-create-a-bot).
 
 Запуск приложения в Docker
 
