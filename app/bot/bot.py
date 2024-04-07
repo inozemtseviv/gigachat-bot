@@ -22,9 +22,12 @@ class Bot:
 
         @self.tg_bot.message_handler(func=lambda message: True)
         def response(message):
-            answer = self.giga_bot.chat(message.text)
-
-            self.tg_bot.reply_to(message, answer.choices[0].message.content)
+            resp = 'Произошла непредвиденная ошибка.'
+            try:
+                answer = self.giga_bot.chat(message.text)
+                resp = answer.choices[0].message.content
+            finally:
+                self.tg_bot.reply_to(message, resp)
 
     def run(self):
         self.setup_handlers()
