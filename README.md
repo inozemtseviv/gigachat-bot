@@ -29,6 +29,12 @@ make up
 make down
 ```
 
+## Пример работы:
+
+![](assets/readme-1.png)
+![](assets/readme-2.png)
+![](assets/readme-3.png)
+
 ## Лицензия
 
 [Лицензия MIT](https://mit-license.org/)
