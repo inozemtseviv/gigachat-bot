@@ -39,4 +39,4 @@ make down
 
 [Лицензия MIT](https://mit-license.org/)
 
-Copyright © 2023 Иноземцев И.В.
+Copyright © 2024 Иноземцев И.В.
